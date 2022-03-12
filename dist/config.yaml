@@ -1,17 +1,17 @@
-project_name: upload2ftp
+project_name: go_zip_ftp
 release:
   github:
-    owner: DuKanghub
-    name: upload2ftp
+    owner: xieyuhua
+    name: go_zip_ftp
   name_template: '{{.Tag}}'
 scoop:
-  name: upload2ftp
+  name: go_zip_ftp
   commit_author:
     name: goreleaserbot
     email: goreleaser@carlosbecker.com
   commit_msg_template: Scoop update for {{ .ProjectName }} version {{ .Tag }}
 builds:
-- id: upload2ftp
+- id: go_zip_ftp
   goos:
   - linux
   - windows
@@ -35,7 +35,7 @@ builds:
   - darwin_arm64
   dir: .
   main: .
-  binary: upload2ftp
+  binary: go_zip_ftp
   env:
   - CGO_ENABLED=0
   builder: go
@@ -46,7 +46,7 @@ builds:
 archives:
 - id: default
   builds:
-  - upload2ftp
+  - go_zip_ftp
   name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm
     }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}'
   replacements:

@@ -4,7 +4,7 @@
  * @Author: seaslog
  * @Date: 2022-03-12 14:31:28
  * @LastEditors: 谢余华
- * @LastEditTime: 2022-03-12 14:49:31
+ * @LastEditTime: 2022-03-12 15:22:31
  */
 package cmd
 
@@ -46,12 +46,12 @@ var uploadCmd = &cobra.Command{
 			Password: ftpPass,
 		}
 		ftpCli := pkg.NewFtpClient(ftpConfig)
-		err := ftpCli.UploadFile(fileName, ftpDir)
+		err := ftpCli.UploadFile(args[0], ftpDir)
 		if err != nil {
 			panic(err)
 		}
 		fmt.Println("上传文件成功", fileName)
-		_ = os.Remove(fileName)
+		_ = os.Remove(args[0])
 
 	},
 }
