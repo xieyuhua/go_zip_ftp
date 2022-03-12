@@ -1,27 +1,21 @@
 /*
-Copyright © 2022 DuKang <dukang@dukanghub.com>
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * @Descripttion:
+ * @version:
+ * @Author: seaslog
+ * @Date: 2022-03-12 14:31:28
+ * @LastEditors: 谢余华
+ * @LastEditTime: 2022-03-12 14:49:31
+ */
 package cmd
 
 import (
 	"fmt"
-	"github.com/DuKanghub/upload2ftp/pkg"
-	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
 	"time"
+
+	"github.com/DuKanghub/upload2ftp/pkg"
+	"github.com/spf13/cobra"
 )
 
 // uploadCmd represents the upload command
@@ -35,15 +29,16 @@ var uploadCmd = &cobra.Command{
 			fmt.Println("请输入文件路径")
 			return
 		} else if len(args) == 1 {
+			// fileName = args[0]
 			fileName = filepath.Base(args[0])
 		}
-		fileName = fileName + ".zip"
-		err := pkg.ZipFiles(args, fileName)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Println("打包文件成功", fileName)
+		// fileName = fileName + ".zip"
+		// err := pkg.ZipFiles(args, fileName)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// 	return
+		// }
+		fmt.Println("打包文件成功", args[0])
 		ftpConfig := pkg.FtpConfig{
 			Host:     ftpHost,
 			Port:     ftpPort,
@@ -51,7 +46,7 @@ var uploadCmd = &cobra.Command{
 			Password: ftpPass,
 		}
 		ftpCli := pkg.NewFtpClient(ftpConfig)
-		err = ftpCli.UploadFile(fileName, ftpDir)
+		err := ftpCli.UploadFile(fileName, ftpDir)
 		if err != nil {
 			panic(err)
 		}
